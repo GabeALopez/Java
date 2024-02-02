@@ -11,11 +11,11 @@ public class Sudoku {
        for(int i = 0; i < row; i++) {
            for(int j = 0; j < column;j++){
 
-               if((j+1) % 3 == 0){
+                   if((j % 3 == 0) && (j != 0)){
 
-                  System.out.print(" | ");
+                       System.out.print(" | ");
 
-               }
+                   }
 
                System.out.print(arr[i][j] + " ");
 
@@ -24,7 +24,7 @@ public class Sudoku {
            if((i+1) % 3 == 0){
 
                System.out.println();
-               System.out.print("------+-------+------");
+               System.out.print("-------+--------+------");
 
            }
 
@@ -59,7 +59,7 @@ public class Sudoku {
 
         return false;
     }
-    public boolean isRowColumnValid(){ return true;}
+    // public boolean isRowColumnValid(){ return true;}
     public boolean isEntryCorrect(){ return true;}
 
 

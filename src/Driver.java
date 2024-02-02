@@ -28,9 +28,14 @@ public class Driver {
 
         Scanner input = new Scanner(System.in);
         String strInput = "";
+        String inputValue = "";
+
         int row = 0;
         int column = 0;
-        int inputValue = 0;
+
+        boolean boolRow = false;
+        boolean boolColumn = false;
+        boolean boolInputValue = false;
 
         Sudoku sudoku = new Sudoku();
 
@@ -58,9 +63,23 @@ public class Driver {
                    column = input.nextInt();
 
                    System.out.println("Enter value:");
-                   inputValue = input.nextInt();
+                   inputValue = input.next();
 
                    //TODO: Check value as well as if it fits in puzzle
+                   boolRow = sudoku.isValueValid(Integer.toString(row));
+                   boolColumn = sudoku.isValueValid(Integer.toString((column)));
+                   boolInputValue = sudoku.isValueValid(inputValue);
+
+                   if(boolRow && boolColumn && boolInputValue){
+
+                       System.out.print("test");
+
+                   }
+                   else{
+                       System.out.println("Invalid input");
+
+                   }
+
 
                }
                else{
