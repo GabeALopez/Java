@@ -35,7 +35,20 @@ public class Sudoku {
 
         return;
     }
-    public boolean isSolved(){ return true;}
+    public boolean isSolved(int[][] arr){
+
+       for (int i = 0; i < 9; i++){
+           for (int j = 0; j < 9; j++){
+
+               if (arr[i][j] == 0){
+                  return false;
+               }
+
+           }
+       }
+
+        return true;
+    }
     public boolean isValueValid(String inputVal){
 
         if(inputVal != null){
@@ -71,31 +84,158 @@ public class Sudoku {
     }
     public boolean isEntryCorrect(int row, int column, int choosenNum, int[][]arr){
 
-       int rowHold = 0;
-       int columnHold = 0;
+       int rowSum = 0;
+       int columnSum = 0;
+       int quadrantSum = 0;
 
        //check for row
        for(int i = 0; i < 9; i++){
 
-           rowHold += arr[i][column];
+           rowSum += arr[i][column];
 
        }
 
-       rowHold += choosenNum;
+       rowSum += choosenNum;
 
        for (int i = 0; i < 9; i++){
 
-          columnHold += arr[row][i];
+          columnSum += arr[row][i];
 
        }
 
-       columnHold += choosenNum;
+       columnSum += choosenNum;
 
-       //TODO: write 9 checks to check each block
+        /*
+            Starting from the top left of the sudoku puzzle, the if statements are to check which quadrant the player asked.
+
+            This is each quadrant's number:
+
+            1|2|3
+            4|5|6
+            7|8|9
+        */
+
+        //Deals with quadrants 1, 4, 7
+        if(1 <= row && row <= 3){
+
+            //Quadrant 1
+           if(1 <= column && column <= 3){
+
+               for (int i = 0; i < 3; i++){
+                   for (int j = 0; j < 3; j++){
+
+                      quadrantSum += arr[i][j];
+
+                   }
+
+               }
+
+               //Quadrant 4
+           } else if (4 <= column && column <= 6) {
+               for (int i = 0; i < 3; i++){
+                   for (int j = 3; j < 6; j++){
+
+                      quadrantSum += arr[i][j];
+
+                   }
+
+               }
+
+               //Quadrant 7
+           } else {
+
+              for (int i = 0; i < 3; i++){
+                 for (int j = 6; j < 9; j++){
+
+                    quadrantSum += arr[i][j];
+
+                 }
+              }
+
+           }
+
+           //Deals with quadrants 2, 5, and 8
+        } else if (4 <= row && row <= 6) {
+            //Quadrant 2
+            if (1 <= column && column <= 3){
+
+               for (int i = 3; i < 6; i++){
+                   for (int j = 0; j < 3; j++){
+
+                       quadrantSum += arr[i][j];
+
+                   }
+
+               }
+
+               //Quadrant 5
+            } else if (4 <= column && column <= 6){
+
+                for (int i = 3; i < 6; i++){
+                    for (int j = 3; j < 6; j++){
+
+                        quadrantSum += arr[i][j];
+
+                    }
+
+                }
+
+                //Quadrant 8
+            } else {
+
+                for (int i = 3; i < 6; i++){
+                    for (int j = 6; j < 9; j++){
+
+                        quadrantSum += arr[i][j];
+
+                    }
+
+                }
+
+            }
+
+            //Deals with Quadrants 3, 6, and 9
+        } else if (7 <= row && row <= 9){
+            //Quadrant 3
+            if (1 <= column && column <= 3){
+
+               for (int i = 6; i < 9; i++){
+                   for (int j = 0; j < 3; j++){
+
+                      quadrantSum += arr[i][j];
+
+                   }
+               }
+
+               //Quadrant 6
+            } else if (4 <= column && column <= 6) {
+
+                for (int i = 6; i < 9; i++){
+                    for (int j = 3; j < 6; j++){
+
+                        quadrantSum += arr[i][j];
+
+                    }
+                }
+
+                //Quadrant 9
+            } else {
+
+                for (int i = 6; i < 9; i++){
+                    for (int j = 6; j < 9; j++){
+
+                        quadrantSum += arr[i][j];
+
+                    }
+                }
+
+            }
+
+        }
+            
 
 
-
-       if ((rowHold == 45) && (columnHold == 45)){
+        if ((rowSum == 45) && (columnSum == 45) && (quadrantSum == 45)){
 
           return true;
 
