@@ -1,17 +1,18 @@
 import java.util.Scanner;
 
 /**
- *
- *    @author : Gabriel Lopez
- *    Student Number : 0683
- *    @date : 1/29/24
- *    (PUT DESCRIPTION HERE)
+ * @author : Gabriel Lopez
+ * Student Number : 0683
+ * @date : 1/29/24
+ * This program plays a game of Sudoku where player has to find the correct missing values
  */
 
 public class Driver {
 
-    public static void main(String[] args){
 
+    public static void main(String[] args) {
+
+        //Array initialization
         int[][] sudokuArr = {
                 {5, 3, 4, 0, 7, 8, 9, 1, 2},
                 {6, 7, 0, 1, 9, 5, 3, 4, 8},
@@ -25,7 +26,7 @@ public class Driver {
         };
 
 
-
+        //Variable initialization
         Scanner input = new Scanner(System.in);
         String strInput = "";
         String inputValue = "";
@@ -39,84 +40,83 @@ public class Driver {
 
         Sudoku sudoku = new Sudoku();
 
-        while(true){
+        //Main loop
+        while (true) {
 
             sudoku.display(sudokuArr);
-
 
             System.out.println("Continue Playing (Y/N)?");
 
             strInput = input.next();
 
-            if(strInput != null) {
+            //Check if input val is Y or N
+            if (strInput != null) {
 
-               if(strInput.equals("N")){
-                   break;
-               }
-               if(strInput.equals("Y")){
+                if (strInput.equals("N")) {
+                    break;
+                }
+                if (strInput.equals("Y")) {
 
-                   System.out.println("Enter row:");
-                   row = input.nextInt();
+                    //Ask for row, column, and entry
 
-                   System.out.println("Enter column:");
-                   column = input.nextInt();
+                    System.out.println("Enter row:");
+                    row = input.nextInt();
 
-                   System.out.println("Enter value:");
-                   inputValue = input.next();
+                    System.out.println("Enter column:");
+                    column = input.nextInt();
 
-                   //TODO: Check value as well as if it fits in puzzle
-                   boolRow = sudoku.isValueValid(Integer.toString(row));
-                   boolColumn = sudoku.isValueValid(Integer.toString((column)));
-                   boolInputValue = sudoku.isValueValid(inputValue);
+                    System.out.println("Enter value:");
+                    inputValue = input.next();
 
-                   if(boolRow && boolColumn && boolInputValue){
+                    //Verify row, column, and entry
+                    boolRow = sudoku.isValueValid(Integer.toString(row));
+                    boolColumn = sudoku.isValueValid(Integer.toString((column)));
+                    boolInputValue = sudoku.isValueValid(inputValue);
 
-                       if(sudoku.isRowColumnValid(row, column, sudokuArr)){
+                    //Check if entry is valid and solves the row,column pair
+                    if (boolRow && boolColumn && boolInputValue) {
 
-                           if (sudoku.isEntryCorrect(row, column, Integer.parseInt(inputValue), sudokuArr)){
+                        if (sudoku.isRowColumnValid(row, column, sudokuArr)) {
 
-                               System.out.println("Correct!");
+                            if (sudoku.isEntryCorrect(row, column, Integer.parseInt(inputValue), sudokuArr)) {
 
-                               sudokuArr[row - 1][column - 1] = Integer.parseInt(inputValue);
+                                System.out.println("Correct!");
 
-                               if (sudoku.isSolved(sudokuArr)){
+                                sudokuArr[row - 1][column - 1] = Integer.parseInt(inputValue);
 
-                                  System.out.println("Congratulations, You solved it!");
-                                  break;
+                                //Check if the full game is solved
+                                if (sudoku.isSolved(sudokuArr)) {
 
-                               }
+                                    System.out.println("Congratulations, You solved it!");
+                                    break;
 
-
-
-                           }
-                           else {
-
-                              System.out.println("NOT Correct!");
-
-                           }
-
-                       }
-                       else {
-                           System.out.println("Wrong entry");
-                       }
+                                }
 
 
-                   }
-                   else{
-                       System.out.println("Invalid input");
+                            } else {
 
-                   }
+                                System.out.println("NOT Correct!");
+
+                            }
+
+                        } else {
+                            System.out.println("Wrong entry");
+                        }
 
 
-               }
-               else{
-                   System.out.println("Invalid input");
-                   System.out.println("Continue Playing (Y/N)?");
+                    } else {
+                        System.out.println("Invalid input");
 
-               }
+                    }
 
-            }
-            else {
+
+                } else {
+                    System.out.println("Invalid input");
+                    System.out.println("Continue Playing (Y/N)?");
+
+                }
+
+            } else {
                 System.out.println("Invalid input");
             }
 
