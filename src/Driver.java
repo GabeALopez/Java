@@ -41,7 +41,6 @@ public class Driver {
 
         while(true){
 
-            //TODO: Display Sudoku array here
             sudoku.display(sudokuArr);
 
 
@@ -72,7 +71,35 @@ public class Driver {
 
                    if(boolRow && boolColumn && boolInputValue){
 
-                       System.out.print("test");
+                       if(sudoku.isRowColumnValid(row, column, sudokuArr)){
+
+                           if (sudoku.isEntryCorrect(row, column, Integer.parseInt(inputValue), sudokuArr)){
+
+                               System.out.println("Correct!");
+
+                               sudokuArr[row - 1][column - 1] = Integer.parseInt(inputValue);
+
+                               if (sudoku.isSolved(sudokuArr)){
+
+                                  System.out.println("Congratulations, You solved it!");
+                                  break;
+
+                               }
+
+
+
+                           }
+                           else {
+
+                              System.out.println("NOT Correct!");
+
+                           }
+
+                       }
+                       else {
+                           System.out.println("Wrong entry");
+                       }
+
 
                    }
                    else{

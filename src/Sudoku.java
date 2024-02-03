@@ -74,36 +74,49 @@ public class Sudoku {
     }
     public boolean isRowColumnValid(int row, int column, int[][] arr){
 
-        if(isValueValid(Integer.toString(row)) && isValueValid(Integer.toString(column))){
+        /*
+
+         if(isValueValid(Integer.toString(row)) && isValueValid(Integer.toString(column))){
 
             return arr[row][column] == 0;
 
         }
 
-        return false;
+         */
+
+        if (arr[row - 1][column - 1] == 0){
+            return true;
+
+        }
+        else {
+            return false;
+        }
+
+
     }
     public boolean isEntryCorrect(int row, int column, int choosenNum, int[][]arr){
 
-       int rowSum = 0;
        int columnSum = 0;
+       int rowSum = 0;
        int quadrantSum = 0;
 
-       //check for row
+       //check for Column
        for(int i = 0; i < 9; i++){
 
-           rowSum += arr[i][column];
-
-       }
-
-       rowSum += choosenNum;
-
-       for (int i = 0; i < 9; i++){
-
-          columnSum += arr[row][i];
+           columnSum += arr[i][column - 1];
 
        }
 
        columnSum += choosenNum;
+
+       //Check for row
+       for (int i = 0; i < 9; i++){
+
+          rowSum += arr[row - 1][i];
+
+       }
+
+       rowSum += choosenNum;
 
         /*
             Starting from the top left of the sudoku puzzle, the if statements are to check which quadrant the player asked.
@@ -130,6 +143,8 @@ public class Sudoku {
 
                }
 
+               quadrantSum += choosenNum;
+
                //Quadrant 4
            } else if (4 <= column && column <= 6) {
                for (int i = 0; i < 3; i++){
@@ -141,6 +156,8 @@ public class Sudoku {
 
                }
 
+               quadrantSum += choosenNum;
+
                //Quadrant 7
            } else {
 
@@ -151,6 +168,8 @@ public class Sudoku {
 
                  }
               }
+
+              quadrantSum += choosenNum;
 
            }
 
@@ -168,6 +187,8 @@ public class Sudoku {
 
                }
 
+               quadrantSum += choosenNum;
+
                //Quadrant 5
             } else if (4 <= column && column <= 6){
 
@@ -180,6 +201,8 @@ public class Sudoku {
 
                 }
 
+                quadrantSum += choosenNum;
+
                 //Quadrant 8
             } else {
 
@@ -191,6 +214,8 @@ public class Sudoku {
                     }
 
                 }
+
+                quadrantSum += choosenNum;
 
             }
 
@@ -235,7 +260,7 @@ public class Sudoku {
             
 
 
-        if ((rowSum == 45) && (columnSum == 45) && (quadrantSum == 45)){
+        if (((columnSum == 45) && (rowSum == 45)) || (quadrantSum == 45)){
 
           return true;
 
