@@ -59,8 +59,50 @@ public class Sudoku {
 
         return false;
     }
-    // public boolean isRowColumnValid(){ return true;}
-    public boolean isEntryCorrect(){ return true;}
+    public boolean isRowColumnValid(int row, int column, int[][] arr){
+
+        if(isValueValid(Integer.toString(row)) && isValueValid(Integer.toString(column))){
+
+            return arr[row][column] == 0;
+
+        }
+
+        return false;
+    }
+    public boolean isEntryCorrect(int row, int column, int choosenNum, int[][]arr){
+
+       int rowHold = 0;
+       int columnHold = 0;
+
+       //check for row
+       for(int i = 0; i < 9; i++){
+
+           rowHold += arr[i][column];
+
+       }
+
+       rowHold += choosenNum;
+
+       for (int i = 0; i < 9; i++){
+
+          columnHold += arr[row][i];
+
+       }
+
+       columnHold += choosenNum;
+
+       //TODO: write 9 checks to check each block
+
+
+
+       if ((rowHold == 45) && (columnHold == 45)){
+
+          return true;
+
+       }
+
+        return false;
+    }
 
 
 }
