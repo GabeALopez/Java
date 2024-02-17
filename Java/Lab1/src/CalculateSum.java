@@ -4,7 +4,6 @@ import java.lang.Math;
 /**
 *
 *    @author : Gabriel Lopez
-*    Student Number : 0683
 *    @date : 1/22/24
 *    This class calculates the sum between num * random and limit * random.
 *    The class also contains the main method.
