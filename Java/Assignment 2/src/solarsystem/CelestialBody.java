@@ -1,12 +1,10 @@
 package solarsystem;
 
-//package exceptions;
-//package solarsystem;
-
 import java.util.ArrayList;
 
-public abstract class CelestialBody {
+import exceptions.DuplicateCelestialBodyException;
 
+public abstract class CelestialBody {
 
 
     private String name;
@@ -19,32 +17,31 @@ public abstract class CelestialBody {
     }
 
     //Getters and Setter
-    public String getName(){ return name;}
-    public String getType(){return type;}
-    public ArrayList<CelestialBody> getChildren(){return Children;}
+    public String getName() {
+        return name;
+    }
 
-    public void add(CelestialBody child){
+    public String getType() {
+        return type;
+    }
 
-       for(CelestialBody celestialBody : getChildren())
-       {
-           if (celestialBody.getType().equals(child.getType())){
-               Throw DuplicateCelestialBodyException("The " + child.getType() + " " + child.getName() + " is already in the collection");
-           }
-       }
+    public ArrayList<CelestialBody> getChildren() {
+        return Children;
+    }
 
-       this.getChildren().add(child);
-       //TODO:Fix this so that "Sun" is an object array
-       System.out.println("The " + child.getType() + " " + child.name + " was successfully added to " + "Sun");
+    public void add(CelestialBody child) throws DuplicateCelestialBodyException {
+
+        if (!Children.contains(child)) {
+
+            Children.add(child);
+            System.out.println("The " + child.getType() + " " + child.getName() + " was successfully added to " + this.getName());
+
+        } else {
+            throw new DuplicateCelestialBodyException("The " + child.getType() + " " + child.getName() + " is already in the collection");
+        }
+
 
     }
 
-     /*
-        ArrayList<CelestialBody> temp = getChildren();
-        temp.add(child);
-
-        //TODO: Make sure to override toString method
-        System.out.println("Planet " + child.toString() + " added");
-
-     */
 
 }

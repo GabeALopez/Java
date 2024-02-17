@@ -1,24 +1,27 @@
 package solarsystem;
 
-public class Moon extends CelestialBody{
+import exceptions.InvalidCelestialBodyException;
+
+public class Moon extends CelestialBody implements IOrbit {
 
     private CelestialBody orbits;
 
-    public Moon(String name, String type, CelestialBody orbits) {
-        super(name, type);
-        //TODO:Fix this
-        type = "Moon";
-        this.orbits = orbits;
+    public Moon(String name, CelestialBody orbits) throws InvalidCelestialBodyException {
+        super(name, "Moon");
 
-        if (orbits.getType().equals("Planet")){
+        if (orbits.getType().equals("Planet")) {
 
-            throw nvalidCelestialBodyException("A moon must orbit a planet");
+            this.orbits = orbits;
 
+        } else {
+            throw new InvalidCelestialBodyException("A moon must orbit a planet");
         }
     }
 
-    //TODO:implement this
-    public void getOrbit(){
+    @Override
+    public void getOrbit() {
+
+        System.out.println(this.getName() + " is orbiting the " + this.orbits.getType() + " " + this.orbits.getName());
 
     }
 }

@@ -5,10 +5,8 @@ public class Star extends CelestialBody {
     private int surfaceTemp;
 
 
-    public Star(String name, String type, int surfaceTemp) {
-        super(name, type);
-        //TODO: might need to fix this
-        type = "Star";
+    public Star(String name, int surfaceTemp) {
+        super(name, "Star");
         this.surfaceTemp = surfaceTemp;
     }
 
@@ -16,9 +14,5 @@ public class Star extends CelestialBody {
         return surfaceTemp;
     }
 
-    //TODO: implement this
-    public void getOrbit(){
-
-    }
 
 }
