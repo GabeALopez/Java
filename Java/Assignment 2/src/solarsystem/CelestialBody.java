@@ -4,6 +4,12 @@ import java.util.ArrayList;
 
 import exceptions.DuplicateCelestialBodyException;
 
+/**
+ * @author Gabriel Lopez
+ * @Date 2/20/24
+ * This class handles defining a celestial body
+ * This is the main parent class
+ */
 public abstract class CelestialBody {
 
 
@@ -11,24 +17,42 @@ public abstract class CelestialBody {
     private String type;
     private final ArrayList<CelestialBody> Children = new ArrayList<CelestialBody>();
 
+    /**
+     * @param name
+     * @param type CelestialBody definition
+     */
     public CelestialBody(String name, String type) {
         this.name = name;
         this.type = type;
     }
 
-    //Getters and Setter
+    //Getters and Setters
+
+    /**
+     * @return name
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * @return type
+     */
     public String getType() {
         return type;
     }
 
+    /**
+     * @return Children
+     */
     public ArrayList<CelestialBody> getChildren() {
         return Children;
     }
 
+    /**
+     * @param child
+     * @throws DuplicateCelestialBodyException Print out what celestial body orbits what
+     */
     public void add(CelestialBody child) throws DuplicateCelestialBodyException {
 
         if (!Children.contains(child)) {
