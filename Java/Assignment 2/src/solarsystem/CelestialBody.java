@@ -9,7 +9,7 @@ public abstract class CelestialBody {
 
     private String name;
     private String type;
-    private ArrayList<CelestialBody> Children;
+    private final ArrayList<CelestialBody> Children = new ArrayList<CelestialBody>();
 
     public CelestialBody(String name, String type) {
         this.name = name;
