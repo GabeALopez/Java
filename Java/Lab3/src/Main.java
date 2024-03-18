@@ -41,10 +41,7 @@ public class Main extends Application {
            circle.setFill(Color.WHITE);
        });
 
-
-
-
-
+        circle.setFocusTraversable(true);
 
         Scene scene = new Scene(pane, 400, 250);
 
