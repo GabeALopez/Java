@@ -1,41 +1,57 @@
 package solarsystem;
 
-import java.util.ArrayList;
-import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
-import javafx.stage.Stage;
 
 public class SolarSystemPane {
 
+    public Pane pane;
+
     SolarSystemPane(){
 
-        StackPane layout = new StackPane();
-        Scene scene = new Scene(layout, 300, 300, Color.BLACK);
+        pane = new Pane();
+        Scene scene = new Scene(pane, 300, 300, Color.BLACK);
 
     }
 
     public void addStar(Star star){
-        //TODO: Add stars to pane and draw orbit path
+        Circle circle = new Circle(0,0, star.getRadius());
+        circle.setFill(Color.YELLOW);
+        pane.getChildren().add(circle);
     }
 
     public void addPlanet(Planet planet, double distance){
 
-        //TODO: Add planet to pane and draw orbit path
+
+        double planetX = 0, planetY = 0;
+        planetX = distance * Math.cos((3*Math.PI)/2);
+        planetY = distance * Math.sin((3*Math.PI)/2);
+
+        Circle circlePlanet = new Circle(planetX, planetY, planet.getRadius());
+        Circle orbit = new Circle(0,0, distance);
+        orbit.setFill(Color.TRANSPARENT);
+
+        pane.getChildren().add(circlePlanet);
+        pane.getChildren().add(orbit);
 
     }
 
     public void addMoon(Moon moon, double distance){
-        //TODO: Add moon to pane and draw orbit path
+
+        double moonX = 0, moonY = 0;
+        moonX = distance * Math.cos((3*Math.PI)/2);
+        moonY = distance * Math.sin((3*Math.PI)/2);
+
+        Circle circleMoon = new Circle(moonX, moonY, moon.getRadius());
+        Circle orbit = new Circle(0,0, distance);
+        orbit.setFill(Color.TRANSPARENT);
+
+        pane.getChildren().add(circleMoon);
+        pane.getChildren().add(orbit);
     }
+
+
 
 }

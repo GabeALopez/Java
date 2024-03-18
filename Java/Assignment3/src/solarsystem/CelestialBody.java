@@ -3,18 +3,9 @@ package solarsystem;
 import exceptions.DuplicateCelestialBodyException;
 
 import java.util.ArrayList;
-import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.geometry.Pos;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.BorderPane;
+
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
-import javafx.stage.Stage;
 
 /**
  * @author Gabriel Lopez
@@ -27,6 +18,7 @@ public abstract class CelestialBody {
 
     private String name;
     private String type;
+    private double radius;
     private final ArrayList<CelestialBody> Children = new ArrayList<CelestialBody>();
 
     /**
@@ -59,6 +51,10 @@ public abstract class CelestialBody {
      */
     public String getType() {
         return type;
+    }
+
+    public double getRadius(){
+        return radius;
     }
 
     public void getInformation(){
