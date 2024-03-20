@@ -3,19 +3,12 @@ package solarsystem;
 import exceptions.DuplicateCelestialBodyException;
 import exceptions.InvalidCelestialBodyException;
 
-import java.util.ArrayList;
+
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
+
 
 import static javafx.application.Application.launch;
 
@@ -26,30 +19,25 @@ import static javafx.application.Application.launch;
  * This class handles creating and displaying celestial objects
  * This class also holds the main method
  */
-public class SolarSystem {
+public class SolarSystem extends Application {
 
-    /**
-     * @param args The main method handles creation and displaying celestial objects
-     */
-    public static void main(String[] args) {
-
-        //TODO: Make video demo
+    public void start(Stage primaryStage) {
 
         try {
 
             //Create sun
-            Star sun = new Star("Sun", 5778);
+            Star sun = new Star("Sun", 5778, Color.YELLOW, 200);
 
             //Poor pluto :(
             //Create planets
-            Planet mercury = new Planet("Mercury", sun);
-            Planet venus = new Planet("Venus", sun);
-            Planet earth = new Planet("Earth", sun);
-            Planet mars = new Planet("Mars", sun);
-            Planet jupiter = new Planet("Jupiter", sun);
-            Planet saturn = new Planet("Saturn", sun);
-            Planet uranus = new Planet("Uranus", sun);
-            Planet neptune = new Planet("Neptune", sun);
+            Planet mercury = new Planet("Mercury", sun, Color.BROWN, 50);
+            Planet venus = new Planet("Venus", sun, Color.BEIGE, 60);
+            Planet earth = new Planet("Earth", sun, Color.BLUE, 60);
+            Planet mars = new Planet("Mars", sun, Color.RED, 50);
+            Planet jupiter = new Planet("Jupiter", sun, Color.BEIGE, 100);
+            Planet saturn = new Planet("Saturn", sun, Color.BEIGE, 100);
+            Planet uranus = new Planet("Uranus", sun, Color.LIGHTBLUE, 70);
+            Planet neptune = new Planet("Neptune", sun, Color.BLUEVIOLET, 80);
 
             //Add planets to sun's orbit
             sun.add(mercury);
@@ -62,9 +50,9 @@ public class SolarSystem {
             sun.add(neptune);
 
             //Create and add moons to planet orbits
-            Moon moon = new Moon("Moon", earth);
-            Moon phobos = new Moon("Phobos", mars);
-            Moon deimos = new Moon("Deimos", mars);
+            Moon moon = new Moon("Moon", earth, Color.WHITE, 2);
+            Moon phobos = new Moon("Phobos", mars, Color.RED, 1);
+            Moon deimos = new Moon("Deimos", mars, Color.RED, 1);
 
             earth.add(moon);
             mars.add(phobos);
@@ -72,15 +60,29 @@ public class SolarSystem {
 
             SolarSystemPane solarSystemPane = new SolarSystemPane();
 
+            solarSystemPane.addStar(sun);
+            solarSystemPane.addPlanet(mercury,500);
 
-
-            launch(args);
+            Scene scene = new Scene(solarSystemPane.pane, 1500, 700, Color.BLACK);
+            primaryStage.setTitle("Solar System");
+            primaryStage.setScene(scene);
+            primaryStage.show();
 
 
         } catch (DuplicateCelestialBodyException | InvalidCelestialBodyException e) {
             e.printStackTrace();
 
         }
+
+    }
+
+    /**
+     * @param args The main method handles creation and displaying celestial objects
+     */
+    public static void main(String[] args) {
+
+        launch(args);
+
 
     }
 }

@@ -19,6 +19,7 @@ public abstract class CelestialBody {
     private String name;
     private String type;
     private double radius;
+    private Color color;
     private final ArrayList<CelestialBody> Children = new ArrayList<CelestialBody>();
 
     /**
@@ -28,6 +29,8 @@ public abstract class CelestialBody {
     public CelestialBody(String name, String type, Color color, double radius) {
         this.name = name;
         this.type = type;
+        this.color = color;
+        this.radius = radius;
 
        Circle circle = new Circle(radius, color);
 
@@ -87,4 +90,7 @@ public abstract class CelestialBody {
     }
 
 
+    public Color getColor() {
+        return color;
+    }
 }
