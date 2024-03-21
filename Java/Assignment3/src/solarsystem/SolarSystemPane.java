@@ -10,6 +10,7 @@ import java.security.PublicKey;
 public class SolarSystemPane {
 
     public Pane pane;
+    private int moonCount = 0;
 
     SolarSystemPane(){
 
@@ -34,6 +35,7 @@ public class SolarSystemPane {
 
         Circle circlePlanet = new Circle(planetX, planetY, planet.getRadius());
         circlePlanet.setFill(planet.getColor());
+
         Circle orbit = new Circle(0,0, distance);
         orbit.setFill(Color.TRANSPARENT);
         orbit.setStroke(Color.WHITE);
@@ -45,18 +47,35 @@ public class SolarSystemPane {
 
     public void addMoon(Moon moon, double distance){
 
-        double moonX = 0, moonY = 0;
-        moonX = distance * Math.cos((3*Math.PI)/2);
-        moonY = distance * Math.sin((3*Math.PI)/2);
+        double orbitX = 0, orbitY = 0, moonX = 0, moonY = 0;
+        orbitX = distance * Math.cos((Math.PI)/5);
+        orbitY = distance * Math.sin((Math.PI)/5);
 
-        Circle circleMoon = new Circle(moonX, moonY, moon.getRadius());
-        Circle orbit = new Circle(0,0, distance);
-        orbit.setFill(Color.TRANSPARENT);
+        int distanceCount = 50;
 
-        pane.getChildren().add(circleMoon);
-        pane.getChildren().add(orbit);
+        for (int i = 0; i < moonCount; i++) {
+            moonX = (distance + distanceCount) * Math.cos((Math.PI)/5);
+            moonY = (distance + distanceCount) * Math.sin((Math.PI)/5);
+            Circle circleMoon = new Circle(moonX, moonY, moon.getRadius());
+            circleMoon.setFill(moon.getColor());
+            pane.getChildren().add(circleMoon);
+
+            Circle orbit = new Circle(orbitX,orbitY, distanceCount);
+            orbit.setFill(Color.TRANSPARENT);
+            orbit.setStroke(Color.WHITE);
+            pane.getChildren().add(orbit);
+
+            distanceCount += 15;
+
+        }
+
+
+
+
     }
 
 
-
+    public void setMoonCount(int moonCount) {
+        this.moonCount = moonCount;
+    }
 }
