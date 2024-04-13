@@ -19,8 +19,7 @@ public class Pokemon implements Serializable {
 
         this.pokemonType = pPokemonType;
         this.name = pName;
-
-
+        this.pokemonID = UUID.randomUUID();
     }
 
     /**

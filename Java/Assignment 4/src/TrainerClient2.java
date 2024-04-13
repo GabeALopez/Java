@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.net.Socket;
 import java.util.UUID;
 
-public class TrainerClient extends Application {
+public class TrainerClient2 extends Application {
 
     //Variable definitions
     DataOutputStream osToServer;
